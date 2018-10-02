@@ -9,10 +9,22 @@
  */
 public class Bank {
 
-    public String bankName;
+    /**
+     * Name of bank.
+     */
+    private String bankName;
 
+    /**
+     * total bank accounts at this bank.
+     */
+    private static int totalBankAccounts = 0;
+
+    /**
+     * Bank constructor.
+     */
     public Bank() {
         bankName = "Illini Bank";
+        totalBankAccounts++;
     }
 
     /**
@@ -29,6 +41,14 @@ public class Bank {
         /*
          * Implement this function
          */
+        double balance = bankAccount.getAccountBalance();
+        balance -= amount;
+        if (balance < 0) {
+            return false;
+        } else {
+            bankAccount.setAccountBalance(balance);
+            return true;
+        }
     }
 
     /**
@@ -45,6 +65,8 @@ public class Bank {
         /*
          * Implement this function
          */
+        bankAccount.setAccountBalance(bankAccount.getAccountBalance() + amount);
+        return true;
     }
 
     /**
@@ -64,6 +86,13 @@ public class Bank {
         /*
          * Implement this function
          */
+        if (amount <= source.getAccountBalance()) {
+            source.setAccountBalance(source.getAccountBalance() - amount);
+            destination.setAccountBalance(destination.getAccountBalance() - amount);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -77,9 +106,14 @@ public class Bank {
         /*
          * Implement this function
          */
+        bankAccount.setOwnerName(name);
     }
 
-    public static int totalAccounts = 0;
+    /**
+     *
+     */
+    private static int totalAccounts = 0;
+
     /**
      * Uses static variable to get number of bank accounts opened.
      *
@@ -89,6 +123,7 @@ public class Bank {
         /*
          * Implement this function
          */
+        return totalBankAccounts;
     }
 
     /**
